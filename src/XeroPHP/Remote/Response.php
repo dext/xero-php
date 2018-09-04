@@ -258,6 +258,7 @@ class Response
                     break;
                 case 'Payslip':
                 case 'PayItems':
+                case 'AssetTypeModel':
                     // some xero endpoints are 1D so we can parse them straight away
                     $this->elements[] = Helpers::XMLToArray($root_child);
                     break;
@@ -289,6 +290,7 @@ class Response
                     break;
                 case 'Payslip':
                 case 'PayItems':
+                case 'AssetTypeModel':
                     // some xero endpoints are 1D so we can parse them straight away
                     $this->elements[] = $root_child;
                     break;
