@@ -18,6 +18,7 @@ abstract class Application
             'core_version'    => '2.0',
             'payroll_version' => '1.0',
             'file_version'    => '1.0',
+            'asset_version'    => '1.0',
             'model_namespace' => '\\XeroPHP\\Models'
         ],
         //OAuth config
