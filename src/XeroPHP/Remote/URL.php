@@ -91,6 +91,9 @@ class URL
                 case self::API_FILE:
                     $version = $xero_config['file_version'];
                     break;
+                case self::API_ASSET:
+                    $version = $xero_config['asset_version'];
+                    break;
                 default:
                     throw new Exception('Invalid API passed to XeroPHP\URL::__construct(). Must be XeroPHP\URL::API_*');
             }

@@ -10,25 +10,25 @@ class AssetType extends Remote\Model
     /**
      * The name of the asset type
      *
-     * @property string assetTypeName
+     * @property string AssetTypeName
      */
 
     /**
      * The asset account for fixed assets of this type
      *
-     * @property string fixedAssetAccountId
+     * @property string FixedAssetAccountId
      */
 
     /**
      * The expense account for the depreciation of fixed assets of this type
      *
-     * @property string depreciationExpenseAccountId
+     * @property string DepreciationExpenseAccountId
      */
 
     /**
      * The account for accumulated depreciation of fixed assets of this type
      *
-     * @property string accumulatedDepreciationAccountId
+     * @property string AccumulatedDepreciationAccountId
      */
 
     /**
@@ -40,7 +40,7 @@ class AssetType extends Remote\Model
     /**
      * Xero generated unique identifier for asset types
      *
-     * @property string assetTypeId
+     * @property string AssetTypeId
      */
 
     /**
@@ -50,7 +50,20 @@ class AssetType extends Remote\Model
      * @property string Locks
      */
 
+    /**
+     *
+     * @property string LockPrivateUseAccount
+     */
 
+    /**
+     *
+     * @property string PrivateUseAccountId
+     */
+
+    /**
+     *
+     * @property string TaxDepreciationSettings
+     */
 
     /**
      * Get the resource uri of the class (Contacts) etc
@@ -81,7 +94,7 @@ class AssetType extends Remote\Model
      */
     public static function getGUIDProperty()
     {
-        return 'assetTypeId';
+        return 'AssetTypeId';
     }
 
 
@@ -121,13 +134,16 @@ class AssetType extends Remote\Model
     public static function getProperties()
     {
         return [
-            'assetTypeName' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
-            'fixedAssetAccountId' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
-            'depreciationExpenseAccountId' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
-            'accumulatedDepreciationAccountId' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
+            'AssetTypeName' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
+            'FixedAssetAccountId' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
+            'DepreciationExpenseAccountId' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
+            'AccumulatedDepreciationAccountId' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
             'BookDepreciationSetting' => [true, self::PROPERTY_TYPE_OBJECT, 'Assets\\AssetType\\BookDepreciationSetting', false, false],
-            'assetTypeId' => [true, self::PROPERTY_TYPE_GUID, null, false, false],
-            'Locks' => [true, self::PROPERTY_TYPE_STRING, null, false, false]
+            'AssetTypeId' => [true, self::PROPERTY_TYPE_GUID, null, false, false],
+            'Locks' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
+            'LockPrivateUseAccount' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
+            'PrivateUseAccountId' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
+            'TaxDepreciationSettings' => [true, self::PROPERTY_TYPE_STRING, null, false, false]
         ];
     }
 
@@ -139,76 +155,76 @@ class AssetType extends Remote\Model
     /**
      * @return string
      */
-    public function getassetTypeName()
+    public function getAssetTypeName()
     {
-        return $this->_data['assetTypeName'];
+        return $this->_data['AssetTypeName'];
     }
 
     /**
      * @param string $value
      * @return AssetType
      */
-    public function setassetTypeName($value)
+    public function setAssetTypeName($value)
     {
-        $this->propertyUpdated('assetTypeName', $value);
-        $this->_data['assetTypeName'] = $value;
+        $this->propertyUpdated('AssetTypeName', $value);
+        $this->_data['AssetTypeName'] = $value;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getfixedAssetAccountId()
+    public function getFixedAssetAccountId()
     {
-        return $this->_data['fixedAssetAccountId'];
+        return $this->_data['FixedAssetAccountId'];
     }
 
     /**
      * @param string $value
      * @return AssetType
      */
-    public function setfixedAssetAccountId($value)
+    public function setFixedAssetAccountId($value)
     {
-        $this->propertyUpdated('fixedAssetAccountId', $value);
-        $this->_data['fixedAssetAccountId'] = $value;
+        $this->propertyUpdated('FixedAssetAccountId', $value);
+        $this->_data['FixedAssetAccountId'] = $value;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getdepreciationExpenseAccountId()
+    public function getDepreciationExpenseAccountId()
     {
-        return $this->_data['depreciationExpenseAccountId'];
+        return $this->_data['DepreciationExpenseAccountId'];
     }
 
     /**
      * @param string $value
      * @return AssetType
      */
-    public function setdepreciationExpenseAccountId($value)
+    public function setDepreciationExpenseAccountId($value)
     {
-        $this->propertyUpdated('depreciationExpenseAccountId', $value);
-        $this->_data['depreciationExpenseAccountId'] = $value;
+        $this->propertyUpdated('DepreciationExpenseAccountId', $value);
+        $this->_data['DepreciationExpenseAccountId'] = $value;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getaccumulatedDepreciationAccountId()
+    public function getAccumulatedDepreciationAccountId()
     {
-        return $this->_data['accumulatedDepreciationAccountId'];
+        return $this->_data['AccumulatedDepreciationAccountId'];
     }
 
     /**
      * @param string $value
      * @return AssetType
      */
-    public function setaccumulatedDepreciationAccountId($value)
+    public function setAccumulatedDepreciationAccountId($value)
     {
-        $this->propertyUpdated('accumulatedDepreciationAccountId', $value);
-        $this->_data['accumulatedDepreciationAccountId'] = $value;
+        $this->propertyUpdated('AccumulatedDepreciationAccountId', $value);
+        $this->_data['AccumulatedDepreciationAccountId'] = $value;
         return $this;
     }
 
@@ -234,19 +250,19 @@ class AssetType extends Remote\Model
     /**
      * @return string
      */
-    public function getassetTypeId()
+    public function getAssetTypeId()
     {
-        return $this->_data['assetTypeId'];
+        return $this->_data['AssetTypeId'];
     }
 
     /**
      * @param string $value
      * @return AssetType
      */
-    public function setassetTypeId($value)
+    public function setAssetTypeId($value)
     {
-        $this->propertyUpdated('assetTypeId', $value);
-        $this->_data['assetTypeId'] = $value;
+        $this->propertyUpdated('AssetTypeId', $value);
+        $this->_data['AssetTypeId'] = $value;
         return $this;
     }
 
@@ -269,5 +285,61 @@ class AssetType extends Remote\Model
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getLockPrivateUseAccount()
+    {
+        return $this->_data['LockPrivateUseAccount'];
+    }
+
+    /**
+     * @param string $value
+     * @return AssetType
+     */
+    public function setLockPrivateUseAccount($value)
+    {
+        $this->propertyUpdated('LockPrivateUseAccount', $value);
+        $this->_data['LockPrivateUseAccount'] = $value;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrivateUseAccountId()
+    {
+        return $this->_data['PrivateUseAccountId'];
+    }
+
+    /**
+     * @param string $value
+     * @return AssetType
+     */
+    public function setPrivateUseAccountId($value)
+    {
+        $this->propertyUpdated('PrivateUseAccountId', $value);
+        $this->_data['PrivateUseAccountId'] = $value;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTaxDepreciationSettings()
+    {
+        return $this->_data['TaxDepreciationSettings'];
+    }
+
+    /**
+     * @param string $value
+     * @return AssetType
+     */
+    public function setTaxDepreciationSettings($value)
+    {
+        $this->propertyUpdated('TaxDepreciationSettings', $value);
+        $this->_data['TaxDepreciationSettings'] = $value;
+        return $this;
+    }
 
 }

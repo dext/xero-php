@@ -9,34 +9,60 @@ class BookDepreciationSetting extends Remote\Model
     /**
      * The method of depreciation applied to this asset. See Depreciation Methods
      *
-     * @property string depreciationMethod
+     * @property string DepreciationMethod
      */
 
     /**
      * The method of averaging applied to this asset. See Averaging Methods
      *
-     * @property string averagingMethod
+     * @property string AveragingMethod
      */
 
     /**
      * The rate of depreciation (e.g. 0.05)
      *
-     * @property float depreciationRate
+     * @property float DepreciationRate
      */
 
     /**
      * The effective life of the assets of this type in years. Not required if using depreciationRate.
      *
-     * @property float[] effectiveLifeYears
+     * @property float[] EffectiveLifeYears
      */
 
     /**
      * See Depreciation Calculation Methods
      *
-     * @property string depreciationCalculationMethod
+     * @property string DepreciationCalculationMethod
      */
 
+    /**
+     * @property string BookEffectiveDateOfChangeId
+     */
 
+    /**
+     * @property string CostLimit
+     */
+
+    /**
+     * @property string DepreciableObjectId
+     */
+
+    /**
+     * @property string DepreciableObjectType
+     */
+
+    /**
+     * @property string EffectiveFromDate
+     */
+
+    /**
+     * @property string PrivateUsePercentage
+     */
+
+    /**
+     * @property string ResidualValue
+     */
 
     /**
      * Get the resource uri of the class (Contacts) etc
@@ -105,11 +131,18 @@ class BookDepreciationSetting extends Remote\Model
     public static function getProperties()
     {
         return [
-            'depreciationMethod' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'averagingMethod' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'depreciationRate' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
-            'effectiveLifeYears' => [false, self::PROPERTY_TYPE_FLOAT, null, true, false],
-            'depreciationCalculationMethod' => [false, self::PROPERTY_TYPE_STRING, null, false, false]
+            'DepreciationMethod' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'AveragingMethod' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'DepreciationRate' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
+            'EffectiveLifeYears' => [false, self::PROPERTY_TYPE_FLOAT, null, true, false],
+            'DepreciationCalculationMethod' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'BookEffectiveDateOfChangeId' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'CostLimit' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'DepreciableObjectId' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'DepreciableObjectType' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'EffectiveFromDate' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'PrivateUsePercentage' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'ResidualValue' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
         ];
     }
 
@@ -121,57 +154,57 @@ class BookDepreciationSetting extends Remote\Model
     /**
      * @return string
      */
-    public function getdepreciationMethod()
+    public function getDepreciationMethod()
     {
-        return $this->_data['depreciationMethod'];
+        return $this->_data['DepreciationMethod'];
     }
 
     /**
      * @param string $value
      * @return BookDepreciationSetting
      */
-    public function setdepreciationMethod($value)
+    public function setDepreciationMethod($value)
     {
-        $this->propertyUpdated('depreciationMethod', $value);
-        $this->_data['depreciationMethod'] = $value;
+        $this->propertyUpdated('DepreciationMethod', $value);
+        $this->_data['DepreciationMethod'] = $value;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getaveragingMethod()
+    public function getAveragingMethod()
     {
-        return $this->_data['averagingMethod'];
+        return $this->_data['AveragingMethod'];
     }
 
     /**
      * @param string $value
      * @return BookDepreciationSetting
      */
-    public function setaveragingMethod($value)
+    public function setAveragingMethod($value)
     {
-        $this->propertyUpdated('averagingMethod', $value);
-        $this->_data['averagingMethod'] = $value;
+        $this->propertyUpdated('AveragingMethod', $value);
+        $this->_data['AveragingMethod'] = $value;
         return $this;
     }
 
     /**
      * @return float
      */
-    public function getdepreciationRate()
+    public function getDepreciationRate()
     {
-        return $this->_data['depreciationRate'];
+        return $this->_data['DepreciationRate'];
     }
 
     /**
      * @param float $value
      * @return BookDepreciationSetting
      */
-    public function setdepreciationRate($value)
+    public function setDepreciationRate($value)
     {
-        $this->propertyUpdated('depreciationRate', $value);
-        $this->_data['depreciationRate'] = $value;
+        $this->propertyUpdated('DepreciationRate', $value);
+        $this->_data['DepreciationRate'] = $value;
         return $this;
     }
 
@@ -179,41 +212,174 @@ class BookDepreciationSetting extends Remote\Model
      * @return float[]|Remote\Collection
      * Always returns a collection, switch is for type hinting
      */
-    public function geteffectiveLifeYears()
+    public function getEffectiveLifeYears()
     {
-        return $this->_data['effectiveLifeYears'];
+        return $this->_data['EffectiveLifeYears'];
     }
 
     /**
      * @param float $value
      * @return BookDepreciationSetting
      */
-    public function addeffectiveLifeYear($value)
+    public function addEffectiveLifeYear($value)
     {
-        $this->propertyUpdated('effectiveLifeYears', $value);
-        if (!isset($this->_data['effectiveLifeYears'])) {
-            $this->_data['effectiveLifeYears'] = new Remote\Collection();
+        $this->propertyUpdated('EffectiveLifeYears', $value);
+        if (!isset($this->_data['EffectiveLifeYears'])) {
+            $this->_data['EffectiveLifeYears'] = new Remote\Collection();
         }
-        $this->_data['effectiveLifeYears'][] = $value;
+        $this->_data['EffectiveLifeYears'][] = $value;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getdepreciationCalculationMethod()
+    public function getDepreciationCalculationMethod()
     {
-        return $this->_data['depreciationCalculationMethod'];
+        return $this->_data['DepreciationCalculationMethod'];
     }
 
     /**
      * @param string $value
      * @return BookDepreciationSetting
      */
-    public function setdepreciationCalculationMethod($value)
+    public function setDepreciationCalculationMethod($value)
     {
-        $this->propertyUpdated('depreciationCalculationMethod', $value);
-        $this->_data['depreciationCalculationMethod'] = $value;
+        $this->propertyUpdated('DepreciationCalculationMethod', $value);
+        $this->_data['DepreciationCalculationMethod'] = $value;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBookEffectiveDateOfChangeId()
+    {
+        return $this->_data['BookEffectiveDateOfChangeId'];
+    }
+
+    /**
+     * @param string $value
+     * @return BookDepreciationSetting
+     */
+    public function setBookEffectiveDateOfChangeId($value)
+    {
+        $this->propertyUpdated('BookEffectiveDateOfChangeId', $value);
+        $this->_data['BookEffectiveDateOfChangeId'] = $value;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCostLimit()
+    {
+        return $this->_data['CostLimit'];
+    }
+
+    /**
+     * @param string $value
+     * @return BookDepreciationSetting
+     */
+    public function setCostLimit($value)
+    {
+        $this->propertyUpdated('CostLimit', $value);
+        $this->_data['CostLimit'] = $value;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDepreciableObjectId()
+    {
+        return $this->_data['DepreciableObjectId'];
+    }
+
+    /**
+     * @param string $value
+     * @return BookDepreciationSetting
+     */
+    public function setDepreciableObjectId($value)
+    {
+        $this->propertyUpdated('DepreciableObjectId', $value);
+        $this->_data['DepreciableObjectId'] = $value;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDepreciableObjectType()
+    {
+        return $this->_data['DepreciableObjectType'];
+    }
+
+    /**
+     * @param string $value
+     * @return BookDepreciationSetting
+     */
+    public function setDepreciableObjectType($value)
+    {
+        $this->propertyUpdated('DepreciableObjectType', $value);
+        $this->_data['DepreciableObjectType'] = $value;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEffectiveFromDate()
+    {
+        return $this->_data['EffectiveFromDate'];
+    }
+
+    /**
+     * @param string $value
+     * @return BookDepreciationSetting
+     */
+    public function setEffectiveFromDate($value)
+    {
+        $this->propertyUpdated('EffectiveFromDate', $value);
+        $this->_data['EffectiveFromDate'] = $value;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrivateUsePercentage()
+    {
+        return $this->_data['PrivateUsePercentage'];
+    }
+
+    /**
+     * @param string $value
+     * @return BookDepreciationSetting
+     */
+    public function setPrivateUsePercentage($value)
+    {
+        $this->propertyUpdated('PrivateUsePercentage', $value);
+        $this->_data['PrivateUsePercentage'] = $value;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getResidualValue()
+    {
+        return $this->_data['ResidualValue'];
+    }
+
+    /**
+     * @param string $value
+     * @return BookDepreciationSetting
+     */
+    public function setResidualValue($value)
+    {
+        $this->propertyUpdated('ResidualValue', $value);
+        $this->_data['ResidualValue'] = $value;
         return $this;
     }
 
