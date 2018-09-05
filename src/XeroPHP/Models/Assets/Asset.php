@@ -27,6 +27,12 @@ class Asset extends Remote\Model
      */
 
     /**
+     * The Xero-generated Id for the asset type
+     *
+     * @property string AssetTypeId
+     */
+
+    /**
      * The date the asset was purchased YYYY-MM-DD
      *
      * @property string PurchaseDate
@@ -160,6 +166,7 @@ class Asset extends Remote\Model
             'AssetId' => [true, self::PROPERTY_TYPE_GUID, null, false, false],
             'AssetName' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
             'AssetNumber' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
+            'AssetTypeId' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
             'PurchaseDate' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
             'PurchasePrice' => [true, self::PROPERTY_TYPE_FLOAT, null, false, false],
             'DisposalPrice' => [true, self::PROPERTY_TYPE_FLOAT, null, false, false],
@@ -221,6 +228,25 @@ class Asset extends Remote\Model
     {
         $this->propertyUpdated('AssetNumber', $value);
         $this->_data['AssetNumber'] = $value;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAssetTypeId()
+    {
+        return $this->_data['AssetTypeId'];
+    }
+
+    /**
+     * @param string $value
+     * @return Asset
+     */
+    public function setAssetTypeId($value)
+    {
+        $this->propertyUpdated('AssetTypeId', $value);
+        $this->_data['AssetTypeId'] = $value;
         return $this;
     }
 
