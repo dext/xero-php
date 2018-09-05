@@ -63,17 +63,17 @@ class Helpers
         return $xml;
     }
 
-    public static function XMLToArray(\SimpleXMLElement $sxml)
+    public static function XMLToArray(\SimpleXMLElement $sxml, $namespace = null)
     {
         $output = [];
         $singular_node_name = self::singularize($sxml->getName());
 
-        foreach ($sxml->children() as $child_name => $child) {
+        foreach ($sxml->children($namespace) as $child_name => $child) {
             /**
              * @var \SimpleXMLElement $child
              */
             if ($child->count() > 0) {
-                $node = self::XMLToArray($child);
+                $node = self::XMLToArray($child, $namespace);
             } else {
                 $node = (string) $child;
             }

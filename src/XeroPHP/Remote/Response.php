@@ -262,7 +262,17 @@ class Response
                     // some xero endpoints are 1D so we can parse them straight away
                     $this->elements[] = Helpers::XMLToArray($root_child);
                     break;
+                case 'items':
+                    //handle namespace for Assets
+                    $namespace = 'http://schemas.datacontract.org/2004/07/Xero.FixedAssets.Api.Models';
 
+                    foreach ($root_child->children($namespace) as $element_index => $element) {
+                        $this->elements[] = Helpers::XMLToArray($element, $namespace);
+                    }
+                    break;
+                case 'pagination':
+                    // don't parse Asset pagination elements
+                    break;
                 default:
                     //Happy to make the assumption that there will only be one
                     //root node with > than 2D children.
