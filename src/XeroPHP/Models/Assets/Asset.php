@@ -95,7 +95,7 @@ class Asset extends Remote\Model
      */
     public static function getResourceURI()
     {
-        return 'Asset';
+        return 'Assets';
     }
 
 
