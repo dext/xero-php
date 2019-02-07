@@ -9,49 +9,55 @@ class Setting extends Remote\Model
     /**
      * The prefix used for fixed asset numbers (“FA-” by default)
      *
-     * @property string assetNumberPrefix
+     * @property string AssetNumberPrefix
      */
 
     /**
      * The next available sequence number
      *
-     * @property string assetNumberSequence
+     * @property string AssetNumberSequence
      */
 
     /**
      * The date depreciation calculations started on registered fixed assets in Xero
      *
-     * @property \DateTimeInterface assetStartDate
+     * @property \DateTimeInterface AssetStartDate
      */
 
     /**
      * The last depreciation date
      *
-     * @property \DateTimeInterface lastDepreciationDate
+     * @property \DateTimeInterface LastDepreciationDate
+     */
+
+    /**
+     * The start date for tax purposes
+     *
+     * @property \DateTimeInterface TaxStartDate
      */
 
     /**
      * Default account that gains are posted to
      *
-     * @property string defaultGainOnDisposalAccountId
+     * @property string DefaultGainOnDisposalAccountId
      */
 
     /**
      * Default account that losses are posted to
      *
-     * @property string defaultLossOnDisposalAccountId
+     * @property string DefaultLossOnDisposalAccountId
      */
 
     /**
      * Default account that capital gains are posted to
      *
-     * @property string defaultCapitalGainOnDisposalAccount
+     * @property string DefaultCapitalGainOnDisposalAccount
      */
 
     /**
-     * 
      *
-     * @property string optInForTax
+     *
+     * @property string OptInForTax
      */
 
 
@@ -124,14 +130,15 @@ class Setting extends Remote\Model
     public static function getProperties()
     {
         return [
-            'assetNumberPrefix' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'assetNumberSequence' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'assetStartDate' => [false, self::PROPERTY_TYPE_DATE, '\\DateTimeInterface', false, false],
-            'lastDepreciationDate' => [false, self::PROPERTY_TYPE_DATE, '\\DateTimeInterface', false, false],
-            'defaultGainOnDisposalAccountId' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'defaultLossOnDisposalAccountId' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'defaultCapitalGainOnDisposalAccount' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
-            'optInForTax' => [false, self::PROPERTY_TYPE_STRING, null, false, false]
+            'AssetNumberPrefix' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'AssetNumberSequence' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'AssetStartDate' => [false, self::PROPERTY_TYPE_DATE, '\\DateTimeInterface', false, false],
+            'LastDepreciationDate' => [false, self::PROPERTY_TYPE_DATE, '\\DateTimeInterface', false, false],
+            'DefaultGainOnDisposalAccountId' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'DefaultLossOnDisposalAccountId' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'DefaultCapitalGainOnDisposalAccount' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'OptInForTax' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'TaxStartDate' => [false, self::PROPERTY_TYPE_DATE, '\\DateTimeInterface', false, false],
         ];
     }
 
@@ -143,154 +150,172 @@ class Setting extends Remote\Model
     /**
      * @return string
      */
-    public function getassetNumberPrefix()
+    public function getAssetNumberPrefix()
     {
-        return $this->_data['assetNumberPrefix'];
+        return $this->_data['AssetNumberPrefix'];
     }
 
     /**
      * @param string $value
      * @return Setting
      */
-    public function setassetNumberPrefix($value)
+    public function setAssetNumberPrefix($value)
     {
-        $this->propertyUpdated('assetNumberPrefix', $value);
-        $this->_data['assetNumberPrefix'] = $value;
+        $this->propertyUpdated('AssetNumberPrefix', $value);
+        $this->_data['AssetNumberPrefix'] = $value;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getassetNumberSequence()
+    public function getAssetNumberSequence()
     {
-        return $this->_data['assetNumberSequence'];
+        return $this->_data['AssetNumberSequence'];
     }
 
     /**
      * @param string $value
      * @return Setting
      */
-    public function setassetNumberSequence($value)
+    public function setAssetNumberSequence($value)
     {
-        $this->propertyUpdated('assetNumberSequence', $value);
-        $this->_data['assetNumberSequence'] = $value;
+        $this->propertyUpdated('AssetNumberSequence', $value);
+        $this->_data['AssetNumberSequence'] = $value;
         return $this;
     }
 
     /**
      * @return \DateTimeInterface
      */
-    public function getassetStartDate()
+    public function getAssetStartDate()
     {
-        return $this->_data['assetStartDate'];
+        return $this->_data['AssetStartDate'];
     }
 
     /**
      * @param \DateTimeInterface $value
      * @return Setting
      */
-    public function setassetStartDate(\DateTimeInterface $value)
+    public function setAssetStartDate(\DateTimeInterface $value)
     {
-        $this->propertyUpdated('assetStartDate', $value);
-        $this->_data['assetStartDate'] = $value;
+        $this->propertyUpdated('AssetStartDate', $value);
+        $this->_data['AssetStartDate'] = $value;
         return $this;
     }
 
     /**
      * @return \DateTimeInterface
      */
-    public function getlastDepreciationDate()
+    public function getLastDepreciationDate()
     {
-        return $this->_data['lastDepreciationDate'];
+        return $this->_data['LastDepreciationDate'];
     }
 
     /**
      * @param \DateTimeInterface $value
      * @return Setting
      */
-    public function setlastDepreciationDate(\DateTimeInterface $value)
+    public function setLastDepreciationDate(\DateTimeInterface $value)
     {
-        $this->propertyUpdated('lastDepreciationDate', $value);
-        $this->_data['lastDepreciationDate'] = $value;
+        $this->propertyUpdated('LastDepreciationDate', $value);
+        $this->_data['LastDepreciationDate'] = $value;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getdefaultGainOnDisposalAccountId()
+    public function getDefaultGainOnDisposalAccountId()
     {
-        return $this->_data['defaultGainOnDisposalAccountId'];
+        return $this->_data['DefaultGainOnDisposalAccountId'];
     }
 
     /**
      * @param string $value
      * @return Setting
      */
-    public function setdefaultGainOnDisposalAccountId($value)
+    public function setDefaultGainOnDisposalAccountId($value)
     {
-        $this->propertyUpdated('defaultGainOnDisposalAccountId', $value);
-        $this->_data['defaultGainOnDisposalAccountId'] = $value;
+        $this->propertyUpdated('DefaultGainOnDisposalAccountId', $value);
+        $this->_data['DefaultGainOnDisposalAccountId'] = $value;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getdefaultLossOnDisposalAccountId()
+    public function getDefaultLossOnDisposalAccountId()
     {
-        return $this->_data['defaultLossOnDisposalAccountId'];
+        return $this->_data['DefaultLossOnDisposalAccountId'];
     }
 
     /**
      * @param string $value
      * @return Setting
      */
-    public function setdefaultLossOnDisposalAccountId($value)
+    public function setDefaultLossOnDisposalAccountId($value)
     {
-        $this->propertyUpdated('defaultLossOnDisposalAccountId', $value);
-        $this->_data['defaultLossOnDisposalAccountId'] = $value;
+        $this->propertyUpdated('DefaultLossOnDisposalAccountId', $value);
+        $this->_data['DefaultLossOnDisposalAccountId'] = $value;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getdefaultCapitalGainOnDisposalAccount()
+    public function getDefaultCapitalGainOnDisposalAccount()
     {
-        return $this->_data['defaultCapitalGainOnDisposalAccount'];
+        return $this->_data['DefaultCapitalGainOnDisposalAccount'];
     }
 
     /**
      * @param string $value
      * @return Setting
      */
-    public function setdefaultCapitalGainOnDisposalAccount($value)
+    public function setDefaultCapitalGainOnDisposalAccount($value)
     {
-        $this->propertyUpdated('defaultCapitalGainOnDisposalAccount', $value);
-        $this->_data['defaultCapitalGainOnDisposalAccount'] = $value;
+        $this->propertyUpdated('DefaultCapitalGainOnDisposalAccount', $value);
+        $this->_data['DefaultCapitalGainOnDisposalAccount'] = $value;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getoptInForTax()
+    public function getOptInForTax()
     {
-        return $this->_data['optInForTax'];
+        return $this->_data['OptInForTax'];
     }
 
     /**
      * @param string $value
      * @return Setting
      */
-    public function setoptInForTax($value)
+    public function setOptInForTax($value)
     {
-        $this->propertyUpdated('optInForTax', $value);
-        $this->_data['optInForTax'] = $value;
+        $this->propertyUpdated('OptInForTax', $value);
+        $this->_data['OptInForTax'] = $value;
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface
+     */
+    public function getTaxStartDate()
+    {
+        return $this->_data['TaxStartDate'];
+    }
+
+    /**
+     * @param \DateTimeInterface $value
+     * @return Setting
+     */
+    public function setTaxStartDate(\DateTimeInterface $value)
+    {
+        $this->propertyUpdated('TaxStartDate', $value);
+        $this->_data['TaxStartDate'] = $value;
+        return $this;
+    }
 
 }

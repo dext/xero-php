@@ -242,6 +242,12 @@ class Response
     {
         $sxml = new SimpleXMLElement($this->response_body);
 
+        // Fixed Asset Settings are special snowflakes
+        if($sxml->getName() === 'AssetSettingModel') {
+            $this->elements[] = Helpers::XMLToArray($sxml);
+            return;
+        }
+
         // For lack of a better way to find the elements returned (every time)
         // XML has an array 2 levels deep due to its non-unique key nature.
         /** @var SimpleXMLElement $root_child */
