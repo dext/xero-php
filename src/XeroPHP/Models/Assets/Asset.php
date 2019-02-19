@@ -45,6 +45,12 @@ class Asset extends Remote\Model
      */
 
     /**
+     * The date the asset was purchased YYYY-MM-DD
+     *
+     * @property string DisposalDate
+     */
+
+    /**
      * The price the asset was disposed at
      *
      * @property float DisposalPrice
@@ -80,6 +86,12 @@ class Asset extends Remote\Model
      * The accounting value of the asset
      *
      * @property float AccountingBookValue
+     */
+
+    /**
+     * The Xero-generated Id for the original invoice
+     *
+     * @property string OriginalInvoiceId
      */
 
     /**
@@ -169,12 +181,14 @@ class Asset extends Remote\Model
             'AssetTypeId' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
             'PurchaseDate' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
             'PurchasePrice' => [true, self::PROPERTY_TYPE_FLOAT, null, false, false],
+            'DisposalDate' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
             'DisposalPrice' => [true, self::PROPERTY_TYPE_FLOAT, null, false, false],
             'AssetStatus' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
             'WarrantyExpiryDate' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
             'SerialNumber' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
             'CanRollBack' => [true, self::PROPERTY_TYPE_BOOLEAN, null, false, false],
             'AccountingBookValue' => [true, self::PROPERTY_TYPE_FLOAT, null, false, false],
+            'OriginalInvoiceId' => [true, self::PROPERTY_TYPE_STRING, null, false, false],
             'BookDepreciationSetting' => [true, self::PROPERTY_TYPE_OBJECT, 'Assets\\AssetType\\BookDepreciationSetting', false, false],
             'BookDepreciationDetail' => [true, self::PROPERTY_TYPE_OBJECT, 'Assets\\Asset\\BookDepreciationDetail', false, false],
         ];
@@ -289,6 +303,25 @@ class Asset extends Remote\Model
     }
 
     /**
+     * @return string
+     */
+    public function getDisposalDate()
+    {
+        return $this->_data['DisposalDate'];
+    }
+
+    /**
+     * @param string $value
+     * @return Asset
+     */
+    public function setDisposalDate($value)
+    {
+        $this->propertyUpdated('DisposalDate', $value);
+        $this->_data['DisposalDate'] = $value;
+        return $this;
+    }
+
+    /**
      * @return float
      */
     public function getDisposalPrice()
@@ -399,6 +432,25 @@ class Asset extends Remote\Model
     {
         $this->propertyUpdated('AccountingBookValue', $value);
         $this->_data['AccountingBookValue'] = $value;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOriginalInvoiceId()
+    {
+        return $this->_data['OriginalInvoiceId'];
+    }
+
+    /**
+     * @param string $value
+     * @return Asset
+     */
+    public function setOriginalInvoiceId($value)
+    {
+        $this->propertyUpdated('OriginalInvoiceId', $value);
+        $this->_data['OriginalInvoiceId'] = $value;
         return $this;
     }
 
