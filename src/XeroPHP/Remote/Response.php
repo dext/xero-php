@@ -43,11 +43,12 @@ class Response
 
     private $root_error;
 
-    public function __construct(Request $request, $response_body, array $curl_info)
+    public function __construct(Request $request, $response_body, array $curl_info, $headers)
     {
         $this->request = $request;
         $this->response_body = $response_body;
         $this->status = $curl_info['http_code'];
+        $this->headers = $headers;
 
         list($this->content_type) = explode(';', $curl_info['content_type']);
     }
@@ -104,7 +105,9 @@ class Response
                 if (false !== stripos($response, 'Organisation is offline')) {
                     throw new OrganisationOfflineException();
                 } elseif (false !== stripos($response, 'Rate limit exceeded')) {
-                    throw new RateLimitExceededException();
+                    $problem = stripos($this->headers, 'X-Rate-Limit-Problem: Minute') !== false ? 'minute' : 'hour';
+
+                    throw new RateLimitExceededException($problem);
                 } else {
                     throw new NotAvailableException();
                 }

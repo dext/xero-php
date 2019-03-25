@@ -71,6 +71,7 @@ class Request
         $ch = curl_init();
         curl_setopt_array($ch, $this->app->getConfig('curl'));
 
+        curl_setopt($ch, CURLOPT_HEADER, true);
         curl_setopt($ch, CURLINFO_HEADER_OUT, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $this->getMethod());
@@ -101,11 +102,13 @@ class Request
         $response = curl_exec($ch);
         $info = curl_getinfo($ch);
 
+        list($headers, $body) = explode("\r\n\r\n", $response, 2);
+
         if ($response === false) {
             throw new Exception('Curl error: ' . curl_error($ch));
         }
 
-        $this->response = new Response($this, $response, $info);
+        $this->response = new Response($this, $body, $info, $headers);
         $this->response->parse();
 
         return $this->response;
