@@ -1,8 +1,8 @@
 <?php
 
-use XeroPHP\Application\PartnerApplication;
-use XeroPHP\Remote\Request;
 use XeroPHP\Remote\URL;
+use XeroPHP\Remote\Request;
+use XeroPHP\Application\PartnerApplication;
 
 // Start a session for the oauth session storage
 session_start();
@@ -10,15 +10,15 @@ session_start();
 //These are the minimum settings - for more options, refer to examples/config.php
 $config = [
     'oauth' => [
-        'callback'              => 'http://localhost/',
-        'consumer_key'          => 'k',
-        'consumer_secret'       => 's',
-        'rsa_private_key'       => 'file://certs/privatekey.pem',
-        'signature_location'  => \XeroPHP\Remote\OAuth\Client::SIGN_LOCATION_QUERY
+        'callback' => 'http://localhost/',
+        'consumer_key' => 'k',
+        'consumer_secret' => 's',
+        'rsa_private_key' => 'file://certs/privatekey.pem',
+        'signature_location' => \XeroPHP\Remote\OAuth\Client::SIGN_LOCATION_QUERY,
     ],
     'curl' => [
-        CURLOPT_CAINFO          => 'certs/ca-bundle.crt'
-    ]
+        CURLOPT_CAINFO => 'certs/ca-bundle.crt',
+    ],
 ];
 
 $xero = new PartnerApplication($config);
@@ -36,7 +36,7 @@ if ($oauth_session === null) {
     try {
         $request->send();
     } catch (Exception $e) {
-        echo($e->getCode());
+        echo $e->getCode();
         print_r($request->getResponse()->getOAuthResponse());
     }
 
@@ -49,7 +49,8 @@ if ($oauth_session === null) {
 
     printf('<a href="%s">Click here to Authorize</a>', $xero->getAuthorizeURL($oauth_response['oauth_token']));
     exit;
-} elseif (isset($oauth_session['session_handle']) && !isset($oauth_session['expires'])) {
+}
+if (isset($oauth_session['session_handle']) && ! isset($oauth_session['expires'])) {
     // If session is expired refresh the token
     $url = new URL($xero, URL::OAUTH_ACCESS_TOKEN);
     $request = new Request($xero, $url);
@@ -60,7 +61,7 @@ if ($oauth_session === null) {
     $request->send();
     $oauth_response = $request->getResponse()->getOAuthResponse();
 
-    $expires = time() + intval($oauth_response['oauth_expires_in']);
+    $expires = time() + (int) $oauth_response['oauth_expires_in'];
 
     setOAuthSession(
         $oauth_response['oauth_token'],
@@ -86,7 +87,7 @@ if ($oauth_session === null) {
         $request->send();
         $oauth_response = $request->getResponse()->getOAuthResponse();
 
-        $expires = time() + intval($oauth_response['oauth_expires_in']);
+        $expires = time() + (int) $oauth_response['oauth_expires_in'];
 
         setOAuthSession(
             $oauth_response['oauth_token'],
@@ -115,15 +116,15 @@ function setOAuthSession($token, $secret, $expires = null, $session_handle = nul
         'token' => $token,
         'token_secret' => $secret,
         'expires' => $expires,
-        'session_handle' => $session_handle
+        'session_handle' => $session_handle,
     ];
 }
 
 function getOAuthSession()
 {
     //If it doesn't exist, return null
-    if (!isset($_SESSION['oauth'])) {
-        return null;
+    if (! isset($_SESSION['oauth'])) {
+        return;
     }
 
     // If the session is expired or expiring, unset the expires key

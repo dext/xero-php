@@ -2,10 +2,10 @@
 
 namespace XeroPHP\tests;
 
-use XeroPHP\Application;
-use XeroPHP\Application\PrivateApplication;
 use XeroPHP\Webhook;
+use XeroPHP\Application;
 use XeroPHP\Webhook\Event;
+use XeroPHP\Application\PrivateApplication;
 
 class WebhookTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,27 +14,27 @@ class WebhookTest extends \PHPUnit_Framework_TestCase
      */
     private $application;
 
-    public function setUp()
+    protected function setUp()
     {
         $config = [
             'oauth' => [
-                'callback'    => 'oob',
-                'consumer_key'      => 'k',
-                'consumer_secret'   => 's',
-                'rsa_private_key'  => 'file://certs/private.pem',
-                'rsa_public_key'   => 'file://certs/public.pem'
+                'callback' => 'oob',
+                'consumer_key' => 'k',
+                'consumer_secret' => 's',
+                'rsa_private_key' => 'file://certs/private.pem',
+                'rsa_public_key' => 'file://certs/public.pem',
             ],
             'webhook' => [
                 'signing_key' => 'test_key',
-            ]
+            ],
         ];
 
         $this->application = new PrivateApplication($config);
     }
 
     /**
-    * @expectedException \XeroPHP\Application\Exception
-    */
+     * @expectedException \XeroPHP\Application\Exception
+     */
     public function testMalformedPayload()
     {
         $payload = 'not valid json';
@@ -70,8 +70,8 @@ class WebhookTest extends \PHPUnit_Framework_TestCase
         $payload = '{"events":[],"firstEventSequence": 0,"lastEventSequence": 2, "entropy": "ZGJDWFZBUNMATYWGAROW"}';
         $webhook = new Webhook($this->application, $payload);
 
-        $this->assertEquals(0, $webhook->getFirstEventSequence());
-        $this->assertEquals(2, $webhook->getLastEventSequence());
+        $this->assertSame(0, $webhook->getFirstEventSequence());
+        $this->assertSame(2, $webhook->getLastEventSequence());
     }
 
     public function testGetApplication()
@@ -79,7 +79,7 @@ class WebhookTest extends \PHPUnit_Framework_TestCase
         $payload = '{"events":[],"firstEventSequence": 0,"lastEventSequence": 2, "entropy": "ZGJDWFZBUNMATYWGAROW"}';
         $webhook = new Webhook($this->application, $payload);
 
-        $this->assertEquals($this->application, $webhook->getApplication());
+        $this->assertSame($this->application, $webhook->getApplication());
     }
 
     public function testGetEvents()
