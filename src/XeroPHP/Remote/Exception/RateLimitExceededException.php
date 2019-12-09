@@ -2,8 +2,8 @@
 
 namespace XeroPHP\Remote\Exception;
 
-use XeroPHP\Remote\Exception;
 use XeroPHP\Remote\Response;
+use XeroPHP\Remote\Exception;
 
 class RateLimitExceededException extends Exception
 {
@@ -11,12 +11,15 @@ class RateLimitExceededException extends Exception
 
     protected $code = Response::STATUS_RATE_LIMIT_EXCEEDED;
 
-    public function __construct($limit_type)
+    protected $rateLimitProblem;
+
+    public function setRateLimitProblem($rateLimitProblem)
     {
-        if ($limit_type === 'minute') {
-            $this->message = 'The per minute API rate limit for your organisation/application pairing has been exceeded.';
-        } else {
-            $this->message = 'The daily API rate limit for your organisation/application pairing has been exceeded.';
-        }
+        $this->rateLimitProblem = strtolower($rateLimitProblem);
+    }
+
+    public function getRateLimitProblem()
+    {
+        return $this->rateLimitProblem;
     }
 }

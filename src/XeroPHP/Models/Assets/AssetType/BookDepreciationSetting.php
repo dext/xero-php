@@ -1,25 +1,25 @@
 <?php
+
 namespace XeroPHP\Models\Assets\AssetType;
 
 use XeroPHP\Remote;
 
 class BookDepreciationSetting extends Remote\Model
 {
-
     /**
-     * The method of depreciation applied to this asset. See Depreciation Methods
+     * The method of depreciation applied to this asset. See Depreciation Methods.
      *
      * @property string DepreciationMethod
      */
 
     /**
-     * The method of averaging applied to this asset. See Averaging Methods
+     * The method of averaging applied to this asset. See Averaging Methods.
      *
      * @property string AveragingMethod
      */
 
     /**
-     * The rate of depreciation (e.g. 0.05)
+     * The rate of depreciation (e.g. 0.05).
      *
      * @property float DepreciationRate
      */
@@ -31,7 +31,7 @@ class BookDepreciationSetting extends Remote\Model
      */
 
     /**
-     * See Depreciation Calculation Methods
+     * See Depreciation Calculation Methods.
      *
      * @property string DepreciationCalculationMethod
      */
@@ -74,9 +74,8 @@ class BookDepreciationSetting extends Remote\Model
         return 'BookDepreciationSetting';
     }
 
-
     /**
-     * Get the root node name.  Just the unqualified classname
+     * Get the root node name.  Just the unqualified classname.
      *
      * @return string
      */
@@ -85,9 +84,8 @@ class BookDepreciationSetting extends Remote\Model
         return 'BookDepreciationSetting';
     }
 
-
     /**
-     * Get the guid property
+     * Get the guid property.
      *
      * @return string
      */
@@ -96,9 +94,8 @@ class BookDepreciationSetting extends Remote\Model
         return '';
     }
 
-
     /**
-     * Get the stem of the API (core.xro) etc
+     * Get the stem of the API (core.xro) etc.
      *
      * @return string|null
      */
@@ -107,9 +104,8 @@ class BookDepreciationSetting extends Remote\Model
         return Remote\URL::API_ASSET;
     }
 
-
     /**
-     * Get the supported methods
+     * Get the supported methods.
      */
     public static function getSupportedMethods()
     {
@@ -118,13 +114,12 @@ class BookDepreciationSetting extends Remote\Model
     }
 
     /**
-     *
      * Get the properties of the object.  Indexed by constants
      *  [0] - Mandatory
      *  [1] - Type
      *  [2] - PHP type
      *  [3] - Is an Array
-     *  [4] - Saves directly
+     *  [4] - Saves directly.
      *
      * @return array
      */
@@ -161,6 +156,7 @@ class BookDepreciationSetting extends Remote\Model
 
     /**
      * @param string $value
+     *
      * @return BookDepreciationSetting
      */
     public function setDepreciationMethod($value)
@@ -180,6 +176,7 @@ class BookDepreciationSetting extends Remote\Model
 
     /**
      * @param string $value
+     *
      * @return BookDepreciationSetting
      */
     public function setAveragingMethod($value)
@@ -199,6 +196,7 @@ class BookDepreciationSetting extends Remote\Model
 
     /**
      * @param float $value
+     *
      * @return BookDepreciationSetting
      */
     public function setDepreciationRate($value)
@@ -210,7 +208,6 @@ class BookDepreciationSetting extends Remote\Model
 
     /**
      * @return float[]|Remote\Collection
-     * Always returns a collection, switch is for type hinting
      */
     public function getEffectiveLifeYears()
     {
@@ -219,6 +216,7 @@ class BookDepreciationSetting extends Remote\Model
 
     /**
      * @param float $value
+     *
      * @return BookDepreciationSetting
      */
     public function addEffectiveLifeYear($value)
@@ -241,6 +239,7 @@ class BookDepreciationSetting extends Remote\Model
 
     /**
      * @param string $value
+     *
      * @return BookDepreciationSetting
      */
     public function setDepreciationCalculationMethod($value)

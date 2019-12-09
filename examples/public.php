@@ -1,8 +1,8 @@
 <?php
 
-use XeroPHP\Application\PublicApplication;
-use XeroPHP\Remote\Request;
 use XeroPHP\Remote\URL;
+use XeroPHP\Remote\Request;
+use XeroPHP\Application\PublicApplication;
 
 // Start a session for the oauth session storage
 session_start();
@@ -10,8 +10,8 @@ session_start();
 //These are the minimum settings - for more options, refer to examples/config.php
 $config = [
     'oauth' => [
-        'callback'        => 'http://localhost/',
-        'consumer_key'    => 'k',
+        'callback' => 'http://localhost/',
+        'consumer_key' => 'k',
         'consumer_secret' => 's',
     ],
     'curl' => [
@@ -49,40 +49,40 @@ if (null === $oauth_session = getOAuthSession()) {
         $xero->getAuthorizeURL($oauth_response['oauth_token'])
     );
     exit;
-} else {
-    $xero->getOAuthClient()
-        ->setToken($oauth_session['token'])
-        ->setTokenSecret($oauth_session['token_secret']);
+}
 
-    if (isset($_REQUEST['oauth_verifier'])) {
-        $xero->getOAuthClient()->setVerifier($_REQUEST['oauth_verifier']);
+$xero->getOAuthClient()
+    ->setToken($oauth_session['token'])
+    ->setTokenSecret($oauth_session['token_secret']);
 
-        $url = new URL($xero, URL::OAUTH_ACCESS_TOKEN);
-        $request = new Request($xero, $url);
+if (isset($_REQUEST['oauth_verifier'])) {
+    $xero->getOAuthClient()->setVerifier($_REQUEST['oauth_verifier']);
 
-        $request->send();
-        $oauth_response = $request->getResponse()->getOAuthResponse();
+    $url = new URL($xero, URL::OAUTH_ACCESS_TOKEN);
+    $request = new Request($xero, $url);
 
-        setOAuthSession(
-            $oauth_response['oauth_token'],
-            $oauth_response['oauth_token_secret'],
-            $oauth_response['oauth_expires_in']
-        );
+    $request->send();
+    $oauth_response = $request->getResponse()->getOAuthResponse();
 
-        //drop the qs
-        $uri_parts = explode('?', $_SERVER['REQUEST_URI']);
+    setOAuthSession(
+        $oauth_response['oauth_token'],
+        $oauth_response['oauth_token_secret'],
+        $oauth_response['oauth_expires_in']
+    );
 
-        //Just for demo purposes
-        header(
-            sprintf(
-                'Location: http%s://%s%s',
-                (isset($_SERVER['HTTPS']) ? 's' : ''),
-                $_SERVER['HTTP_HOST'],
-                $uri_parts[0]
-            )
-        );
-        exit;
-    }
+    //drop the qs
+    $uri_parts = explode('?', $_SERVER['REQUEST_URI']);
+
+    //Just for demo purposes
+    header(
+        sprintf(
+            'Location: http%s://%s%s',
+            (isset($_SERVER['HTTPS']) ? 's' : ''),
+            $_SERVER['HTTP_HOST'],
+            $uri_parts[0]
+        )
+    );
+    exit;
 }
 
 //Otherwise, you're in.
@@ -94,24 +94,25 @@ function setOAuthSession($token, $secret, $expires = null)
 {
     // expires sends back an int
     if ($expires !== null) {
-        $expires = time() + intval($expires);
+        $expires = time() + (int) $expires;
     }
 
     $_SESSION['oauth'] = [
         'token' => $token,
         'token_secret' => $secret,
-        'expires' => $expires
+        'expires' => $expires,
     ];
 }
 
 function getOAuthSession()
 {
     //If it doesn't exist or is expired, return null
-    if (!isset($_SESSION['oauth'])
+    if (! isset($_SESSION['oauth'])
         || ($_SESSION['oauth']['expires'] !== null
         && $_SESSION['oauth']['expires'] <= time())
     ) {
-        return null;
+        return;
     }
+
     return $_SESSION['oauth'];
 }
