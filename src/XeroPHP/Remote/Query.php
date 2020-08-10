@@ -33,6 +33,8 @@ class Query
     private $offset;
 
     private $includeArchived;
+    
+    private $createdByMyApp;
 
     private $params;
 
@@ -45,6 +47,7 @@ class Query
         $this->page = null;
         $this->offset = null;
         $this->includeArchived = false;
+        $this->createdByMyApp = false;
         $this->params = [];
     }
 
@@ -113,7 +116,7 @@ class Query
                 $this->where[] = sprintf('%s==%s', $args[0], $args[1]);
             } elseif (preg_match('/^(\'|")?(true|false)("|\')?$/i', $args[1])) {
                 $this->where[] = sprintf('%s=%s', $args[0], $args[1]);
-            } elseif (preg_match('/^([a-z]+)\\.\\1ID$/i', $args[0])
+            } elseif (preg_match('/^([a-z]+)(\\.\\1)?ID$/i', $args[0])
                 && preg_match(
                     '/^[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}$/i',
                     $args[1]
@@ -245,6 +248,13 @@ class Query
 
         return $this;
     }
+    
+    public function createdByMyApp($createdByMyApp = true)
+    {
+        $this->createdByMyApp = (bool) $createdByMyApp;
+        
+        return $this;
+    }
 
     public function setParameter($key, $value)
     {
@@ -311,6 +321,10 @@ class Query
 
         if ($this->includeArchived !== false) {
             $request->setParameter('includeArchived', 'true');
+        }
+        
+        if ($this->createdByMyApp !== false) {
+            $request->setParameter('createdByMyApp', 'true');
         }
 
         $request->send();
