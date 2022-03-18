@@ -3,6 +3,7 @@
 namespace XeroPHP\Remote;
 
 use SimpleXMLElement;
+use Throwable;
 use XeroPHP\Helpers;
 use XeroPHP\Remote\Exception\BadRequestException;
 use XeroPHP\Remote\Exception\ForbiddenException;
@@ -13,6 +14,7 @@ use XeroPHP\Remote\Exception\NotImplementedException;
 use XeroPHP\Remote\Exception\OrganisationOfflineException;
 use XeroPHP\Remote\Exception\RateLimitExceededException;
 use XeroPHP\Remote\Exception\ReportPermissionMissingException;
+use XeroPHP\Remote\Exception\SimpleXMLException;
 use XeroPHP\Remote\Exception\UnauthorizedException;
 use XeroPHP\Remote\Exception\UnknownStatusException;
 
@@ -305,7 +307,13 @@ class Response
 
     public function parseXML()
     {
-        $sxml = new SimpleXMLElement($this->response_body);
+        // There appears to be an issue with some client data returning as unparsable XML
+        // If that happens we want to catch that data and report it
+        try {
+            $sxml = new SimpleXMLElement($this->response_body);
+        } catch(Throwable $exception) {
+            throw new SimpleXMLException($exception->getMessage(), $this->response_body);
+        }
 
         // Fixed Asset Settings are special snowflakes
         if($sxml->getName() === 'AssetSettingModel') {
