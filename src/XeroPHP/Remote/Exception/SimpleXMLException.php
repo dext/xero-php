@@ -14,7 +14,7 @@ class SimpleXMLException extends Exception
     {
         $this->_data = $data;
         $this->_xmlHeaderContentLength = $xmlContentLength ?? 0;
-        $this->_xmlLength = count($data) ?? 0;
+        $this->_xmlLength = strlen($data) ?? 0;
         parent::__construct($message);
     }
 
