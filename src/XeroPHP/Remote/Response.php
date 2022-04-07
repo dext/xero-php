@@ -312,7 +312,11 @@ class Response
         try {
             $sxml = new SimpleXMLElement($this->response_body);
         } catch(Throwable $exception) {
-            throw new SimpleXMLException($exception->getMessage(), $this->response_body);
+            throw new SimpleXMLException(
+                $exception->getMessage(),
+                $this->response_body,
+                $this->headers[Request::HEADER_CONTENT_LENGTH]
+            );
         }
 
         // Fixed Asset Settings are special snowflakes
