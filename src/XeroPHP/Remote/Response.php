@@ -3,6 +3,7 @@
 namespace XeroPHP\Remote;
 
 use SimpleXMLElement;
+use Tidy;
 use Throwable;
 use XeroPHP\Helpers;
 use XeroPHP\Remote\Exception\BadRequestException;
@@ -308,15 +309,28 @@ class Response
     public function parseXML()
     {
         // There appears to be an issue with some client data returning as unparsable XML
-        // If that happens we want to catch that data and report it
+        // If that happens we want to catch that data and fix it
         try {
             $sxml = new SimpleXMLElement($this->response_body);
         } catch(Throwable $exception) {
-            throw new SimpleXMLException(
-                $exception->getMessage(),
-                $this->response_body,
-                $this->headers[Request::HEADER_CONTENT_LENGTH]
-            );
+            // Try to fix the unparsable XML using Tidy
+            try {
+                $tidy = new Tidy();
+                $config = [
+                    'output-xml'     => true,
+                    'input-xml'     => true,
+                    'numeric-entities' => false,
+                ];
+                $xml = $tidy->repairString($this->response_body, $config);
+                $xml = preg_replace('/[^[:print:]\n\t]/u', '', $xml);
+                $sxml = new SimpleXMLElement($xml);
+            } catch(Throwable $exception) {
+                throw new SimpleXMLException(
+                    $exception->getMessage(),
+                    $this->response_body,
+                    $this->headers[Request::HEADER_CONTENT_LENGTH]
+                );
+            }
         }
 
         // Fixed Asset Settings are special snowflakes
