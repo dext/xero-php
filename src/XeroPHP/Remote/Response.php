@@ -314,15 +314,22 @@ class Response
             $sxml = new SimpleXMLElement($this->response_body);
         } catch(Throwable $exception) {
             // Try to fix the unparsable XML using Tidy
+            // The 'numeric-entities' => false, will decode entities into characters
+            // then the preg_replace will remove the control characters
             try {
                 $tidy = new Tidy();
+            
                 $config = [
                     'output-xml'     => true,
                     'input-xml'     => true,
                     'numeric-entities' => false,
                 ];
+
                 $xml = $tidy->repairString($this->response_body, $config);
+
+                // This line removes the non printable characters which are causing the issue
                 $xml = preg_replace('/[^[:print:]\n\t]/u', '', $xml);
+
                 $sxml = new SimpleXMLElement($xml);
             } catch(Throwable $exception) {
                 throw new SimpleXMLException(
