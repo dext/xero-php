@@ -22,6 +22,8 @@ class URL
 
     const API_ASSET = 'assets.xro';
 
+    const API_PRACTICE_MANAGER = 'practicemanager';
+
     const OAUTH_REQUEST_TOKEN = 'RequestToken';
 
     const OAUTH_ACCESS_TOKEN = 'AccessToken';
@@ -41,7 +43,7 @@ class URL
     /**
      * @param Application $app
      * @param $endpoint
-     * @param null $api
+     * @param string|null $api
      *
      * @throws Exception
      * @throws \XeroPHP\Exception
@@ -85,6 +87,11 @@ class URL
                     break;
                 case self::API_ASSET:
                     $version = $xero_config['asset_version'];
+
+                    break;
+                case self::API_PRACTICE_MANAGER:
+                    $version = $xero_config['practice_manager_version'];
+
                     break;
                 default:
                     throw new Exception('Invalid API passed to XeroPHP\\URL::__construct(). Must be XeroPHP\\URL::API_*');

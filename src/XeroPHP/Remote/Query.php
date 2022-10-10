@@ -33,7 +33,7 @@ class Query
     private $offset;
 
     private $includeArchived;
-    
+
     private $createdByMyApp;
 
     private $params;
@@ -123,6 +123,8 @@ class Query
                 )
             ) {
                 $this->where[] = sprintf('%s=Guid("%s")', $args[0], $args[1]);
+            } elseif (preg_match('/^DateTime\(.+\)$/', $args[1])) {
+                $this->where[] = sprintf('%s==%s', $args[0], $args[1]);
             } else {
                 $this->where[] = sprintf('%s=="%s"', $args[0], $args[1]);
             }
@@ -248,11 +250,11 @@ class Query
 
         return $this;
     }
-    
+
     public function createdByMyApp($createdByMyApp = true)
     {
         $this->createdByMyApp = (bool) $createdByMyApp;
-        
+
         return $this;
     }
 
@@ -322,7 +324,7 @@ class Query
         if ($this->includeArchived !== false) {
             $request->setParameter('includeArchived', 'true');
         }
-        
+
         if ($this->createdByMyApp !== false) {
             $request->setParameter('createdByMyApp', 'true');
         }

@@ -22,6 +22,7 @@ class Application
             'payroll_version' => '1.0',
             'file_version' => '1.0',
             'asset_version' => '1.0',
+            'practice_manager_version' => '3.0',
         ]
     ];
 
@@ -224,7 +225,7 @@ class Application
      * @throws Exception
      * @throws Remote\Exception\NotFoundException
      *
-     * @return Collection
+     * @return Collection|array
      */
     public function loadByGUIDs($model, $guids)
     {

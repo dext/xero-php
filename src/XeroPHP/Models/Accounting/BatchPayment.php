@@ -36,9 +36,11 @@ class BatchPayment extends Remote\Model
      */
 
     /**
-     * See Payments
+     * Particulars, Code, Reference (NZ Only) Optional references for the batch payment transaction.
      *
-     * @property Payment[] Payments
+     * @property string Particulars
+     * @property string Code
+     * @property string Reference
      */
 
     /**
@@ -115,7 +117,7 @@ class BatchPayment extends Remote\Model
     /**
      * Get the stem of the API (core.xro) etc
      *
-     * @return string|null
+     * @return string
      */
     public static function getAPIStem()
     {
@@ -149,16 +151,19 @@ class BatchPayment extends Remote\Model
     {
         return [
             'Account' => [false, self::PROPERTY_TYPE_OBJECT, 'Accounting\\Account', false, false],
-            'Payments' => [false, self::PROPERTY_TYPE_OBJECT, 'Accounting\\Payment', true, false],
-            'Date' => [false, self::PROPERTY_TYPE_DATE, '\\DateTimeInterface', false, false],
-            'TotalAmount' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
+            'Particulars' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'Code' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'Reference' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'Narrative' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'Details' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'BatchPaymentID' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
+            'Date' => [false, self::PROPERTY_TYPE_DATE, '\\DateTimeInterface', false, false],
+            'Payments' => [false, self::PROPERTY_TYPE_OBJECT, 'Accounting\\Payment', true, false],
+            'TotalAmount' => [false, self::PROPERTY_TYPE_FLOAT, null, false, false],
             'IsReconciled' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'Status' => [false, self::PROPERTY_TYPE_ENUM, null, false, false],
             'Type' => [false, self::PROPERTY_TYPE_ENUM, null, false, false],
             'UpdatedDateUTC' => [false, self::PROPERTY_TYPE_TIMESTAMP, '\\DateTimeInterface', false, false],
-            'BatchPaymentID' => [false, self::PROPERTY_TYPE_STRING, null, false, false]
         ];
     }
 
@@ -205,6 +210,64 @@ class BatchPayment extends Remote\Model
     {
         $this->propertyUpdated('Account', $value);
         $this->_data['Account'] = $value;
+        return $this;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getParticulars()
+    {
+        return $this->_data['Particulars'];
+    }
+
+    /**
+     * @param string $value
+     * @return BatchPayment
+     */
+    public function setParticulars($value)
+    {
+        $this->propertyUpdated('Particulars', $value);
+        $this->_data['Particulars'] = $value;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->_data['Code'];
+    }
+
+    /**
+     * @param string $value
+     * @return BatchPayment
+     */
+    public function setCode($value)
+    {
+        $this->propertyUpdated('Code', $value);
+        $this->_data['Code'] = $value;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->_data['Reference'];
+    }
+
+    /**
+     * @param string $value
+     * @return BatchPayment
+     */
+    public function setReference($value)
+    {
+        $this->propertyUpdated('Reference', $value);
+        $this->_data['Reference'] = $value;
         return $this;
     }
 
@@ -326,4 +389,66 @@ class BatchPayment extends Remote\Model
         return $this->_data['BatchPaymentID'];
     }
 
+    /**
+     * @param string $value
+     * @return BatchPayment
+     */
+    public function setBatchPaymentID($value)
+    {
+        $this->propertyUpdated('BatchPaymentID', $value);
+        $this->_data['BatchPaymentID'] = $value;
+        return $this;
+    }    
+
+    /**
+     * @return Payment[]|Remote\Collection
+     */
+    public function getPayments()
+    {
+        if (!isset($this->_data['Payments'])) {
+            $this->_data['Payments'] = new Remote\Collection();
+        }
+
+        return $this->_data['Payments'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->_data['Type'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->_data['Status'];
+    }
+
+    /**
+     * @return float
+     */
+    public function getTotalAmount()
+    {
+        return $this->_data['TotalAmount'];
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsReconciled()
+    {
+        return $this->_data['IsReconciled'];
+    }
+
+    /**
+     * @return \DateTimeInterface
+     */
+    public function getUpdatedDateUTC()
+    {
+        return $this->_data['UpdatedDateUTC'];
+    }
 }
