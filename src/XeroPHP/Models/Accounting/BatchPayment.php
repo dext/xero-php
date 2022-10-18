@@ -312,25 +312,6 @@ class BatchPayment extends Remote\Model
     /**
      * @return string
      */
-    public function getReference()
-    {
-        return $this->_data['Reference'];
-    }
-
-    /**
-     * @param string $value
-     * @return BatchPayment
-     */
-    public function setReference($value)
-    {
-        $this->propertyUpdated('Reference', $value);
-        $this->_data['Reference'] = $value;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
     public function getDetails()
     {
         return $this->_data['Details'];
@@ -366,7 +347,7 @@ class BatchPayment extends Remote\Model
     /**
      * @return string
      */
-    public function getType()
+    public function getPaymentType()
     {
         return $this->_data['PaymentType'];
     }
@@ -398,18 +379,6 @@ class BatchPayment extends Remote\Model
         $this->propertyUpdated('BatchPaymentID', $value);
         $this->_data['BatchPaymentID'] = $value;
         return $this;
-    }    
-
-    /**
-     * @return Payment[]|Remote\Collection
-     */
-    public function getPayments()
-    {
-        if (!isset($this->_data['Payments'])) {
-            $this->_data['Payments'] = new Remote\Collection();
-        }
-
-        return $this->_data['Payments'];
     }
 
     /**
@@ -418,37 +387,5 @@ class BatchPayment extends Remote\Model
     public function getType()
     {
         return $this->_data['Type'];
-    }
-
-    /**
-     * @return string
-     */
-    public function getStatus()
-    {
-        return $this->_data['Status'];
-    }
-
-    /**
-     * @return float
-     */
-    public function getTotalAmount()
-    {
-        return $this->_data['TotalAmount'];
-    }
-
-    /**
-     * @return bool
-     */
-    public function getIsReconciled()
-    {
-        return $this->_data['IsReconciled'];
-    }
-
-    /**
-     * @return \DateTimeInterface
-     */
-    public function getUpdatedDateUTC()
-    {
-        return $this->_data['UpdatedDateUTC'];
     }
 }
