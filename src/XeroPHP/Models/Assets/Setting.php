@@ -3,6 +3,7 @@
 namespace XeroPHP\Models\Assets;
 
 use XeroPHP\Remote;
+use Log;
 
 class Setting extends Remote\Model
 {
@@ -205,7 +206,10 @@ class Setting extends Remote\Model
      */
     public function getLastDepreciationDate()
     {
+        Log::info('inside get last depreciation date');
+        Log::info($this->_data['LastDepreciationDate']);
         if ($this->_data['LastDepreciationDate'] === null) {
+            Log::info('inside last deprecation date is null');
             return new DateTime('9999-12-31 23:59:59');
         }
         return $this->_data['LastDepreciationDate'];
