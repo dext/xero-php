@@ -127,7 +127,7 @@ class Setting extends Remote\Model
             'AssetNumberPrefix' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'AssetNumberSequence' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'AssetStartDate' => [false, self::PROPERTY_TYPE_DATE, '\\DateTimeInterface', false, false],
-            'LastDepreciationDate' => [false, self::PROPERTY_TYPE_DATE, '\\DateTimeInterface', false, false],
+            'LastDepreciationDate' => new DateTime('9999-12-31 23:59:59'),
             'DefaultGainOnDisposalAccountId' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'DefaultLossOnDisposalAccountId' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
             'DefaultCapitalGainOnDisposalAccount' => [false, self::PROPERTY_TYPE_STRING, null, false, false],
