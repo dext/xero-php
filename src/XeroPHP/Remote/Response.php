@@ -351,6 +351,9 @@ class Response
         /** @var SimpleXMLElement $root_child */
         foreach ($sxml as $child_index => $root_child) {
             switch ($child_index) {
+                case 'PageInfo':
+                    // TODO: We can potentially handle the page info and make it a value on the response object
+                    break;
                 case 'ErrorNumber':
                     $this->root_error['code'] = (string)$root_child;
 
@@ -399,6 +402,9 @@ class Response
 
         foreach ($json as $child_index => $root_child) {
             switch ($child_index) {
+                case 'PageInfo':
+                    // TODO: We can potentially handle the page info and make it a value on the response object
+                    break;
                 case 'ErrorNumber':
                     $this->root_error['code'] = $root_child;
 
