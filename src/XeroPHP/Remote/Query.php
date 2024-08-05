@@ -38,6 +38,8 @@ class Query
 
     private $params;
 
+    private $warnings;
+
     public function __construct(Application $app)
     {
         $this->app = $app;
@@ -49,6 +51,7 @@ class Query
         $this->includeArchived = false;
         $this->createdByMyApp = false;
         $this->params = [];
+        $this->warnings = [];
     }
 
     /**
@@ -331,8 +334,11 @@ class Query
 
         $request->send();
 
+        $response = $request->getResponse();
+        $this->warnings = $response->getRootWarnings();
+
         $elements = new Collection();
-        foreach ($request->getResponse()->getElements() as $element) {
+        foreach ($response->getElements() as $element) {
             /**
              * @var Model
              */
@@ -342,6 +348,11 @@ class Query
         }
 
         return $elements;
+    }
+
+    public function getWarnings()
+    {
+        return $this->warnings;
     }
 
     public function first()
