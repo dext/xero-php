@@ -70,7 +70,7 @@ abstract class Model implements ObjectInterface, \JsonSerializable, \ArrayAccess
      */
     protected $_application;
 
-    public function __construct(Application $application = null)
+    public function __construct(?Application $application = null)
     {
         $this->_application = $application;
         $this->_dirty = [];
